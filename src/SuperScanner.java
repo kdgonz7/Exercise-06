@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /// <summary>
 /// <h3>SuperScanner</h3>
@@ -15,41 +16,44 @@ public class SuperScanner {
         scannerInternal = new Scanner(System.in);
     }
 
-    public double promptDouble(String prompt) {
-        return promptNumeric(prompt);
+    public static boolean isANumber(String givenInput) {
+        var match = Pattern.compile("^-?\\d+(\\.?\\d+)?$").matcher(givenInput);
+        return match.matches();
     }
 
-    public String promptString() {
+    public String promptString(String prompt) {
+        System.out.println(prompt);
         var scanned = scannerInternal.nextLine();
 
-        try {
-            var _ = Integer.parseInt(scanned);
-            var _ = Double.parseDouble(scanned);
-
-            System.out.println("Please type a string, not a number.");
-
-            return promptString();
-        } catch (NumberFormatException e) {
-            return scanned;
+        if (isANumber(scanned)) {
+            System.out.println("Invalid input. Please enter a string.");
+            return promptString(prompt);
         }
+
+        return scanned;
+    }
+
+    public double promptDouble(String prompt) {
+        System.out.println(prompt);
+        var scanned = scannerInternal.nextLine();
+
+        if (!isANumber(scanned)) {
+            System.out.println("Invalid input. Please enter a numeric value.");
+            return promptDouble(prompt);
+        }
+
+        return Double.parseDouble(scanned);
     }
 
     public int promptInt(String prompt) {
-        double regularInput = promptNumeric(prompt);
-        return (int) regularInput; // for sake of simplicity, just cast...
-    }
+        System.out.println(prompt);
+        var scanned = scannerInternal.nextLine();
 
-    private double promptNumeric(String prompt) {
-        String userInput;
-
-        while (true) {
-            try {
-                userInput = scannerInternal.nextLine();
-                return Double.parseDouble(userInput);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a numeric value.");
-                System.out.print(prompt);
-            }
+        if (!isANumber(scanned)) {
+            System.out.println("Invalid input. Please enter an integer.");
+            return promptInt(prompt);
         }
+
+        return Integer.parseInt(scanned);
     }
 }

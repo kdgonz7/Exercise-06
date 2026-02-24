@@ -11,22 +11,17 @@ public class Main {
     }
 
     private static void testInteger(SuperScanner superScanner) {
-        System.out.print("Enter an integer: ");
-
         int intValue = superScanner.promptInt("Enter an integer: ");
         System.out.println("You entered: " + intValue);
     }
 
     private static void testString(SuperScanner superScanner) {
-        System.out.print("Enter a string: ");
-        String stringValue = superScanner.promptString();
+        String stringValue = superScanner.promptString("Enter a string: ");
         System.out.println("You entered: " + stringValue);
     }
 
     private static void testNumeric(SuperScanner superScanner) {
-        System.out.print("Enter a numeric value: ");
         double numericValue = superScanner.promptDouble("Enter a double-ic value: ");
-
         System.out.println("You entered: " + numericValue);
     }
 }
