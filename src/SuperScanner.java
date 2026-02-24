@@ -20,7 +20,20 @@ public class SuperScanner {
     }
 
     public String promptString() {
-        return scannerInternal.nextLine();
+        var scanned = scannerInternal.nextLine();
+
+        try {
+
+            var _ = Integer.parseInt(scanned);
+            var _ = Double.parseDouble(scanned);
+
+            System.out.println("Please type a string, not a number.");
+
+            return promptString();
+        } catch (NumberFormatException e) {
+            return scanned;
+        }
+
     }
 
     public int promptInt(String prompt) {
