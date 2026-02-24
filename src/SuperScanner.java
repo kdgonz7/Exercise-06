@@ -23,7 +23,6 @@ public class SuperScanner {
         var scanned = scannerInternal.nextLine();
 
         try {
-
             var _ = Integer.parseInt(scanned);
             var _ = Double.parseDouble(scanned);
 
@@ -33,7 +32,6 @@ public class SuperScanner {
         } catch (NumberFormatException e) {
             return scanned;
         }
-
     }
 
     public int promptInt(String prompt) {
