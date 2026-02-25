@@ -17,7 +17,12 @@ public class SuperScanner {
     }
 
     public static boolean isANumber(String givenInput) {
-        var match = Pattern.compile("^-?\\d+(\\.?\\d+)?$").matcher(givenInput);
+        var match = Pattern.compile("^-?\\d+").matcher(givenInput);
+        return match.matches();
+    }
+
+    public static boolean isADouble(String givenInput) {
+        var match = Pattern.compile("^-?\\d*\\.\\d+$").matcher(givenInput);
         return match.matches();
     }
 
@@ -37,7 +42,7 @@ public class SuperScanner {
         System.out.println(prompt);
         var scanned = scannerInternal.nextLine();
 
-        if (!isANumber(scanned)) {
+        if (!isADouble(scanned)) {
             System.out.println("Invalid input. Please enter a numeric value.");
             return promptDouble(prompt);
         }
